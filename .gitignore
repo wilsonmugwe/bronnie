@@ -1,0 +1,98 @@
+# =========================
+# Environment / Secrets
+# =========================
+
+.env
+.env.*
+!.env.example
+
+secrets/
+credentials/
+
+*.pem
+*.key
+*.p12
+*.pfx
+
+# =========================
+# Python
+# =========================
+
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+.venv/
+venv/
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+.coverage
+coverage.xml
+htmlcov/
+
+# =========================
+# Node / Next.js
+# =========================
+
+node_modules/
+.next/
+out/
+dist/
+coverage/
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# Terraform
+# =========================
+
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+
+terraform.tfvars
+*.auto.tfvars
+
+crash.log
+crash.*.log
+
+# =========================
+# AWS
+# =========================
+
+.aws/
+
+# =========================
+# IDE
+# =========================
+
+.vscode/
+.idea/
+
+# =========================
+# Operating System
+# =========================
+
+.DS_Store
+Thumbs.db
+
+# =========================
+# Logs
+# =========================
+
+*.log
+logs/
+
+# =========================
+# Temporary
+# =========================
+
+tmp/
+temp/
