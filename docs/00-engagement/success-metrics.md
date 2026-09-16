@@ -2,36 +2,69 @@
 
 ## 1. Purpose
 
-BRONNIE must demonstrate measurable business improvement rather than simply demonstrate that an AI system can execute a workflow.
+BRONNIE must demonstrate measurable business, technical, security, operational, and eventually commercial value.
 
-This document identifies candidate success metrics for the proof of concept.
+Success is not defined simply by demonstrating that an AI model can respond to a request or that an application can execute a workflow.
 
-Exact baselines and targets will be established after discovery and current-state measurement.
+This document identifies candidate success metrics for the initial Customer Operations implementation and the broader BRONNIE product.
 
-## 2. Primary Business Metrics
+Exact baselines and numerical targets will be established where sufficient evidence exists.
+
+No improvement claim should be made without an appropriate baseline.
+
+---
+
+## 2. Success Dimensions
+
+BRONNIE success will be evaluated across:
+
+1. Business outcomes
+2. Workflow performance
+3. AI quality
+4. AI safety and escalation
+5. Customer-service performance
+6. Security
+7. Tenant isolation
+8. Auditability
+9. Reliability and operations
+10. AI and infrastructure cost
+11. Product adoption
+12. Commercial viability
+
+The relative importance of individual metrics may change as BRONNIE progresses from POC to pilot, MVP, and commercial deployment.
+
+---
+
+## 3. Primary Business Metrics
 
 ### Processing Time
 
-Measures the time required to complete a business process.
+Measures the time required to complete a selected business process.
 
-Examples:
+Examples include:
 
-* Time to process an enquiry
-* Time to process an invoice
-* Time to book an appointment
-* Time to route an email
+- Time to process an enquiry
+- Time to route an enquiry
+- Time to coordinate a booking
+- Time to reschedule an appointment
 
-The objective is to demonstrate a meaningful reduction compared with the existing manual process.
+Measurement should compare:
+
+`Current manual process → BRONNIE-assisted process → Difference`
+
+---
 
 ### Manual Effort
 
-Measures the amount of employee time required per workflow.
+Measures employee effort required per workflow.
 
 Potential measurement:
 
-`Manual minutes required per request`
+`Manual employee minutes required per workflow`
 
-BRONNIE should reduce manual effort without creating unacceptable error rates.
+BRONNIE should reduce repetitive human effort without creating unacceptable errors, security risk, or customer-service degradation.
+
+---
 
 ### Customer Response Time
 
@@ -39,48 +72,24 @@ Measures:
 
 `Customer request received → first meaningful response`
 
-This is particularly relevant to enquiries, leads, and appointment requests.
+This is particularly relevant to:
+
+- General enquiries
+- Appointment requests
+- Clarification requests
+- Routed customer requests
+
+---
 
 ### Automation Rate
 
 Measures:
 
-`Successfully automated workflows / eligible workflows × 100`
+`Successfully automated eligible workflows / eligible workflows × 100`
 
-A higher automation rate is useful only if accuracy and safety remain acceptable.
+Automation rate must not be optimised independently of correctness, safety, customer experience, and escalation quality.
 
-## 3. AI Performance Metrics
-
-### Classification Accuracy
-
-Measures whether BRONNIE correctly identifies request intent.
-
-Potential categories include:
-
-* Sales enquiry
-* Support request
-* Appointment request
-* Invoice
-* General enquiry
-* Internal request
-
-### Extraction Accuracy
-
-Measures whether required structured information is correctly extracted.
-
-Examples include:
-
-* Customer name
-* Company
-* Email
-* Invoice number
-* Invoice amount
-* Date
-* Appointment preference
-
-### Confidence Calibration
-
-AI confidence should be compared with actual correctness to determine whether confidence thresholds can safely control automation.
+---
 
 ## 4. Workflow Metrics
 
@@ -88,121 +97,501 @@ AI confidence should be compared with actual correctness to determine whether co
 
 `Successfully completed workflows / workflows started × 100`
 
-### Automation Failure Rate
+---
 
-Measures workflows that fail because of:
+### Workflow Failure Rate
 
-* AI errors
-* API failures
-* invalid data
-* infrastructure problems
-* business-rule failures
+Measures failures caused by:
+
+- AI processing
+- Invalid or missing data
+- External API failures
+- Infrastructure failures
+- Business-rule rejection
+- Policy rejection
+- Permission failure
+- Integration failure
+
+---
 
 ### Human Intervention Rate
 
-`Workflows requiring human intervention / total workflows × 100`
+`Workflows requiring human intervention / total eligible workflows × 100`
 
-This should be analysed rather than blindly minimised.
+Human intervention should be analysed rather than blindly minimised.
 
-Human intervention may be desirable for sensitive workflows.
+Appropriate escalation is a successful safety behaviour when automation would otherwise be unsafe or unreliable.
+
+---
+
+### Workflow Duration
+
+Measures:
+
+`Workflow created → workflow completed`
+
+The metric should support breakdown by:
+
+- Organisation
+- Workflow type
+- Automated vs human-assisted
+- Success vs failure
+
+---
+
+### Workflow Backlog
+
+Measures unresolved workflows and their age.
+
+This may help identify:
+
+- Operational bottlenecks
+- Integration failures
+- Customer-response delays
+- Human-review bottlenecks
+
+---
+
+## 5. AI Quality Metrics
+
+### Classification Quality
+
+Measures whether BRONNIE correctly identifies supported request intent.
+
+Initial categories may include:
+
+- General enquiry
+- Appointment booking
+- Appointment rescheduling
+- Appointment cancellation
+- Internal routing request
+- Complaint
+- Unsupported or unknown request
+
+---
+
+### Extraction Quality
+
+Measures whether required structured information is correctly extracted.
+
+Examples may include:
+
+- Customer identity
+- Contact information
+- Requested service
+- Requested date
+- Requested time
+- Employee preference
+- Existing appointment reference
+
+---
+
+### Structured Output Validity
+
+Measures:
+
+`Schema-valid AI outputs / total structured AI outputs × 100`
+
+AI output used operationally should satisfy required schemas and validation rules.
+
+---
+
+### Confidence Calibration
+
+Where model confidence or confidence-like signals are used, they should be evaluated against actual correctness.
+
+Confidence must not be treated as proof of correctness.
+
+---
+
+## 6. AI Safety and Hallucination-Control Metrics
+
+BRONNIE must measure whether uncertainty is handled safely.
+
+Potential metrics include:
+
+### Unsupported Fact Rate
+
+Number of cases where BRONNIE introduces a required operational fact that cannot be supported by:
+
+- Authoritative system information
+- Customer-provided information
+- Approved business knowledge
+- Human confirmation
+
+The target for fabricated required operational facts should be:
+
+**0 accepted operational actions based on fabricated required facts.**
+
+---
+
+### Clarification Rate
+
+Measures workflows where BRONNIE correctly requests missing information from the customer.
+
+---
+
+### Escalation Rate
+
+Measures workflows escalated because of:
+
+- Uncertainty
+- Unsupported request
+- Sensitive action
+- Missing information that cannot be safely clarified automatically
+- Policy requirement
+- Integration failure
+
+---
 
 ### Escalation Accuracy
 
 Measures whether workflows requiring human review are correctly identified and escalated.
 
-## 5. Customer Service Metrics
+Both missed escalation and unnecessary escalation should be evaluated.
+
+---
+
+### Authoritative Verification Rate
+
+For workflow actions requiring authoritative information:
+
+`Actions appropriately verified against authoritative source / actions requiring authoritative verification × 100`
+
+For critical required authoritative checks, the expected target should be 100%.
+
+---
+
+## 7. Appointment Metrics
 
 Potential metrics include:
 
-* Average response time
-* Missed enquiry rate
-* Booking completion rate
-* Follow-up completion rate
-* Response accuracy
-* Customer wait time
+- Booking completion rate
+- Rescheduling completion rate
+- Cancellation completion rate
+- Average booking coordination time
+- Average number of customer interactions required
+- Booking failure rate
+- Calendar integration failure rate
+- Human intervention rate
+- Booking conflict rate
 
-## 6. Invoice Processing Metrics
+BRONNIE must not represent appointment availability as confirmed without validation against the authoritative scheduling system.
+
+---
+
+## 8. Customer-Service Metrics
 
 Potential metrics include:
 
-* Average invoice processing time
-* Data extraction accuracy
-* Duplicate detection accuracy
-* Manual corrections per invoice
-* Percentage requiring human review
-* Processing failure rate
+- Average first-response time
+- Median first-response time
+- Missed enquiry rate
+- Routing accuracy
+- Follow-up completion rate
+- Response correctness
+- Customer wait time
+- Repeat-contact rate
+- Human escalation rate
 
-Financial correctness should take priority over automation percentage.
+Where practical, median and distribution-based measures should be considered in addition to averages.
 
-## 7. Operational Metrics
+---
 
-Potential operational metrics include:
+## 9. Multi-Tenant Metrics
 
-* Requests processed per hour
-* Workflow backlog
-* Average workflow duration
-* External API failure rate
-* Retry rate
-* System availability
-* Error rate
-* Average API latency
+BRONNIE should measure platform behaviour by organisation where appropriate.
 
-## 8. AI Cost Metrics
+Potential metrics include:
 
-AI usage must also be economically viable.
+- Active organisations
+- Workflows per organisation
+- Users per organisation
+- Automation rate per organisation
+- Human intervention rate per organisation
+- AI usage per organisation
+- Integration usage per organisation
+- Failure rate per organisation
+- Infrastructure and AI cost attribution where feasible
 
-Metrics may include:
+Metrics must preserve tenant-isolation requirements.
 
-* AI cost per request
-* Tokens per workflow
-* AI cost per successful automation
-* Monthly projected AI cost
-* Cost by workflow type
+---
 
-## 9. AWS Cost Metrics
+## 10. Security Metrics
 
-Potential infrastructure metrics include:
-
-* Monthly AWS cost
-* Cost per processed workflow
-* Database cost
-* Compute cost
-* Storage cost
-* Network cost
-
-POC infrastructure should remain deliberately cost-conscious.
-
-## 10. Security and Governance Metrics
+Security metrics must not be treated as proof that the platform is secure, but they can provide evidence of control effectiveness and operational risk.
 
 Potential measures include:
 
-* Unauthorised actions: 0
-* Secrets exposed: 0
-* High-risk actions executed without required approval: 0
-* Percentage of automated actions recorded in audit logs
-* Failed authentication attempts
-* Permission violations
+- Confirmed cross-tenant data exposures
+- Unauthorised actions
+- High-risk actions executed without required approval
+- Authentication failures
+- Authorisation failures
+- Privilege-change events
+- Secret exposures
+- Security-control test failures
+- Vulnerabilities by severity
+- Time to remediate significant vulnerabilities
+- Suspicious integration-authentication events
 
-## 11. POC Success Criteria
+Critical targets include:
 
-Final numerical thresholds will be determined after discovery.
+- Confirmed cross-tenant data exposure: **0**
+- Unauthorised high-risk actions: **0**
+- Secrets committed to source control: **0**
 
-The POC should ultimately demonstrate:
+---
 
-1. Reliable classification of selected business requests.
+## 11. Tenant Isolation Metrics and Tests
+
+Tenant isolation is a critical BRONNIE security invariant.
+
+Validation should include explicit tests demonstrating that one organisation cannot access another organisation's:
+
+- Workflow data
+- User data
+- Integration configuration
+- Files
+- Audit information
+- AI context
+- Knowledge sources
+- Tenant-scoped metrics
+- Other protected tenant resources
+
+Success requires tenant-isolation tests to pass before production multi-tenant use.
+
+---
+
+## 12. Auditability Metrics
+
+Potential metrics include:
+
+### Audit Coverage
+
+`Important auditable actions with complete audit records / total important auditable actions × 100`
+
+---
+
+### Workflow Traceability
+
+For a selected workflow, BRONNIE should be capable of reconstructing relevant information including:
+
+- Trigger
+- Actor
+- Organisation
+- AI operation
+- Structured AI result
+- Authoritative information consulted
+- Policy decision
+- Approval decision
+- Tool invocation
+- External result
+- State transition
+- Timestamp
+- Failure and retry information where applicable
+
+---
+
+### Evidence-Backed Explanation Coverage
+
+Measures whether explanations of important automated actions can be generated from recorded workflow evidence rather than unsupported retrospective AI explanation.
+
+---
+
+## 13. Operational Metrics
+
+Potential operational metrics include:
+
+- Requests processed per unit of time
+- Workflow backlog
+- Average workflow duration
+- External API failure rate
+- Retry rate
+- System availability
+- Error rate
+- API latency
+- Worker failure rate
+- Queue depth where queues are used
+- Database health
+- Integration health
+
+Product service-level objectives will be established when workload and customer expectations are sufficiently defined.
+
+---
+
+## 14. AI Operational Metrics
+
+Potential metrics include:
+
+- AI request latency
+- AI failure rate
+- AI timeout rate
+- Model usage
+- Token usage
+- Cost per AI operation
+- Cost per workflow
+- Cost per successful automation
+- Human escalation rate by AI workflow
+- Model or prompt version associated with workflow outcomes
+
+These metrics should support evaluation of both quality and economics.
+
+---
+
+## 15. AWS Cost Metrics
+
+Potential infrastructure metrics include:
+
+- Monthly AWS cost
+- Cost per organisation
+- Cost per processed workflow
+- Compute cost
+- Database cost
+- Storage cost
+- Network cost
+- Monitoring cost
+- Cost by environment where practical
+
+Infrastructure should remain cost-aware without compromising required security, reliability, or maintainability.
+
+---
+
+## 16. Product Adoption Metrics
+
+As BRONNIE progresses toward commercial deployment, potential product metrics include:
+
+- Organisations onboarded
+- Active organisations
+- Active users
+- Workflows executed
+- Workflow adoption by type
+- Automation utilisation
+- Feature adoption
+- Time to onboard an organisation
+- Time to first successful automated workflow
+- Organisation retention
+- Expansion into additional BRONNIE modules
+
+These metrics are primarily relevant after pilot and MVP stages.
+
+---
+
+## 17. Commercial Metrics
+
+Commercial success must eventually be evaluated using evidence rather than assumptions.
+
+Potential metrics include:
+
+- Willingness to pay
+- Paying organisations
+- Revenue per organisation
+- Monthly recurring revenue where applicable
+- Customer acquisition cost when measurable
+- Operating cost per organisation
+- AI cost per organisation
+- Infrastructure cost per organisation
+- Support cost per organisation
+- Gross-margin potential
+- Customer retention
+- Expansion revenue
+- Onboarding cost
+- Payback characteristics
+
+Exact commercial targets should not be established until sufficient market and cost evidence exists.
+
+---
+
+## 18. Validation-Stage Success Criteria
+
+### POC
+
+The POC should demonstrate:
+
+- Technical feasibility
+- Reliable supported AI tasks
+- Safe uncertainty handling
+- End-to-end workflow execution
+- Integration feasibility
+- Auditability
+- Security-control feasibility
+- Initial measurable operational improvement
+
+---
+
+### Pilot
+
+The pilot should demonstrate:
+
+- Performance using realistic workflows
+- Operational usefulness
+- Human adoption
+- Reliable escalation
+- Security under realistic operating conditions
+- Tenant-boundary effectiveness where applicable
+- Measurable business improvement
+- Realistic AI and AWS costs
+
+---
+
+### MVP
+
+The MVP should demonstrate:
+
+- Repeatable onboarding
+- Multi-tenant operation
+- Product-grade security foundations
+- Reliable workflow execution
+- Appropriate observability
+- Usage metering
+- Supportable operations
+- Evidence of customer willingness to use and potentially pay for BRONNIE
+
+---
+
+### Commercial Product
+
+Commercial success should eventually demonstrate:
+
+- Paying customers
+- Customer retention
+- Sustainable operating economics
+- Reliable and secure production operation
+- Repeatable onboarding
+- Measurable customer value
+- Demand for continued use or expansion
+
+---
+
+## 19. Initial Customer Operations Success Criteria
+
+Final numerical thresholds will be established after appropriate baseline measurement and testing.
+
+The initial Customer Operations implementation should demonstrate:
+
+1. Reliable classification of selected customer requests.
 2. Accurate extraction of required information.
-3. Successful end-to-end execution of selected workflows.
-4. Reduced manual processing time.
-5. Reduced customer response time where applicable.
-6. Appropriate human escalation.
-7. Complete auditability of important automated actions.
-8. Acceptable AI and infrastructure costs.
-9. No unauthorised high-risk actions.
-10. Clear evidence that the solution could provide business value if expanded.
+3. Safe handling of missing information.
+4. Appropriate escalation of uncertainty.
+5. No accepted automated action based on fabricated required operational facts.
+6. Successful end-to-end execution of selected workflows.
+7. Authoritative calendar verification for relevant appointment actions.
+8. Reduced manual processing effort where measurable.
+9. Reduced customer response time where applicable.
+10. Complete auditability of important automated actions.
+11. Evidence-backed explanations of important automated decisions.
+12. Correct enforcement of required human approval.
+13. Correct organisation-scoped access control.
+14. No confirmed cross-tenant data exposure.
+15. Acceptable AI and infrastructure costs.
+16. Clear evidence of operational value.
 
-## 12. Baseline Requirement
+---
 
-No improvement claim should be made without a baseline.
+## 20. Baseline Requirement
+
+No improvement claim should be made without an appropriate baseline.
 
 For each selected workflow, the project should attempt to establish:
 
@@ -210,17 +599,26 @@ For each selected workflow, the project should attempt to establish:
 
 For example:
 
-`Manual invoice processing time → BRONNIE processing time → percentage improvement`
+`Manual booking coordination time → BRONNIE-assisted booking coordination time → measured difference`
 
-This allows technical performance to be connected directly to business value.
+The same metric definition should be used before and after implementation wherever possible.
 
-## 13. FDE Success Principle
+Stakeholder estimates should be identified as estimates rather than treated as verified production telemetry.
 
-The POC is not successful merely because:
+---
 
-* the AI responds,
-* the application runs,
-* the API works,
-* or the system is deployed to AWS.
+## 21. Product Success Principle
 
-The POC is successful when it demonstrates a **measurable improvement to a validated business problem**.
+BRONNIE is not successful merely because:
+
+- the AI responds,
+- the application runs,
+- an API works,
+- a workflow executes,
+- or the platform is deployed to AWS.
+
+BRONNIE is successful when it can demonstrate:
+
+**Technical correctness + AI reliability + security + controlled automation + operational improvement + auditability + customer value + commercially sustainable operation.**
+
+The POC is one validation stage toward that objective, not the final destination.
