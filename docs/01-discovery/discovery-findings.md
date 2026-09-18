@@ -1,8 +1,11 @@
 # BRONNIE — Discovery Findings
 
-**Project:** BRONNIE  
-**Phase:** Phase 1 — Discovery  
-**Document Status:** Final  
+**Project:** BRONNIE
+
+**Phase:** Phase 1 — Discovery
+
+**Document Status:** Final — Product Strategy Alignment Added
+
 **Owner:** Technical Lead / Forward Deployed Engineer
 
 ---
@@ -24,11 +27,14 @@ It summarises:
 - constraints;
 - preliminary opportunity areas;
 - solution hypotheses;
-- recommendations for the next phase.
+- product hypotheses;
+- recommendations for subsequent phases.
 
 The purpose of this document is not to define the final BRONNIE solution.
 
-It provides the evidence required to begin Phase 2 — Problem Definition.
+It records the operational evidence gathered during discovery and provides the foundation for Problem Definition, Current-State Analysis, Product Strategy, and later Requirements Engineering.
+
+Later product-strategy decisions must remain distinguishable from evidence originally established during discovery.
 
 ---
 
@@ -36,7 +42,14 @@ It provides the evidence required to begin Phase 2 — Problem Definition.
 
 Discovery indicates that the client's primary challenge is not a single isolated administrative task.
 
-The organisation is experiencing broader operational fragmentation across customer communications, bookings, documents, invoicing and internal business systems.
+The organisation experiences broader operational fragmentation across:
+
+- customer communications;
+- bookings;
+- documents;
+- invoicing;
+- internal workflows;
+- business systems.
 
 Administrative employees currently perform significant manual work to:
 
@@ -56,11 +69,27 @@ As business volume increases, many of these activities increase proportionally b
 
 Management has previously responded by increasing administrative staffing, but workload pressure continues to grow.
 
-Discovery therefore indicates an opportunity to improve how operational work is coordinated, processed and measured.
+Discovery therefore indicates an opportunity to improve how operational work is:
+
+- interpreted;
+- coordinated;
+- routed;
+- processed;
+- tracked;
+- measured.
 
 However, the evidence does not support automating every identified workflow.
 
-The next phase must determine which problems provide the strongest combination of business impact, frequency, feasibility and measurable value.
+The discovery findings also do not establish that these problems exist across the wider market.
+
+Later phases must determine:
+
+- which problems BRONNIE should solve first;
+- which activities are appropriate for automation;
+- which actions require human authority;
+- which systems must remain authoritative;
+- whether the identified problems are repeatable across other organisations;
+- whether BRONNIE can deliver measurable operational and commercial value.
 
 ---
 
@@ -81,7 +110,9 @@ The preliminary operational baseline identified during stakeholder discussions i
 
 These values are stakeholder estimates.
 
-They have not yet been verified against production system data and must therefore be treated as preliminary baselines.
+They have not been verified against production system telemetry and must therefore be treated as preliminary baselines.
+
+No later business-value claim should present these estimates as verified production measurements.
 
 ---
 
@@ -106,6 +137,28 @@ Discovery investigated the following major operational workflows:
 
 Although these workflows appear different from the customer's perspective, several share similar internal processing patterns.
 
+A recurring pattern is:
+
+```text
+Information Received
+        ↓
+Human Interpretation
+        ↓
+Workflow Selection
+        ↓
+Business System Access
+        ↓
+Manual Information Transfer
+        ↓
+Business Action
+        ↓
+Follow-Up
+        ↓
+Completion
+```
+
+This recurring structure represents an important discovery finding.
+
 ---
 
 ## 5. Finding F-001 — High Communication Volume
@@ -128,7 +181,7 @@ Administrative employees may need to:
 - enter information into another system;
 - create follow-up work.
 
-This creates significant administrative workload before the underlying customer request is actually resolved.
+This creates administrative workload before the underlying customer request is actually resolved.
 
 ### Business Impact
 
@@ -166,7 +219,7 @@ Email workload can therefore create secondary workload in other channels.
 
 The issue is not simply the number of emails.
 
-The larger problem is the amount of human interpretation and workflow coordination required for each actionable message.
+The larger problem is the amount of human interpretation and workflow coordination required for actionable messages.
 
 ---
 
@@ -189,7 +242,7 @@ A booking may require staff to:
 
 A straightforward booking may require approximately 5–10 minutes of administrative effort.
 
-Bookings requiring multiple rounds of communication can take longer.
+Bookings requiring multiple rounds of communication may take longer.
 
 ### Business Impact
 
@@ -249,15 +302,25 @@ An employee then:
 
 ### Common Pattern
 
-Business event  
-→ Information received  
-→ Human interpretation  
-→ Workflow selected  
-→ Another system accessed  
-→ Information manually transferred  
-→ Action performed  
-→ Follow-up  
-→ Completion
+```text
+Business Event
+      ↓
+Information Received
+      ↓
+Human Interpretation
+      ↓
+Workflow Selected
+      ↓
+Another System Accessed
+      ↓
+Information Manually Transferred
+      ↓
+Action Performed
+      ↓
+Follow-Up
+      ↓
+Completion
+```
 
 ### Business Impact
 
@@ -270,7 +333,7 @@ Manual data transfer creates:
 - dependency on individual employees;
 - reduced scalability.
 
-Employees are effectively acting as the integration layer between business systems.
+Employees are effectively acting as a manual integration layer between business systems.
 
 ---
 
@@ -383,14 +446,23 @@ This indicates that several current workflows scale primarily through additional
 
 ### Current Pattern
 
-Business grows  
-→ More emails  
-→ More calls  
-→ More bookings  
-→ More documents  
-→ More invoices  
-→ More manual processing  
-→ More administrative capacity required
+```text
+Business Growth
+      ↓
+More Emails
+      ↓
+More Calls
+      ↓
+More Bookings
+      ↓
+More Documents
+      ↓
+More Invoices
+      ↓
+More Manual Processing
+      ↓
+More Administrative Capacity Required
+```
 
 ### Business Impact
 
@@ -404,7 +476,7 @@ A future solution should therefore be evaluated partly on whether it reduces the
 
 Not all repetitive activities should be automated to the same level.
 
-Discovery identified significant differences between low-risk and high-risk actions.
+Discovery identified significant differences between lower-risk and higher-risk actions.
 
 Potentially lower-risk activities may include:
 
@@ -426,15 +498,15 @@ Higher-risk activities include:
 
 AI interpretation must not automatically grant authority to perform sensitive business actions.
 
-Future workflows must incorporate:
+Future workflows must incorporate, where appropriate:
 
 - business rules;
 - permissions;
 - validation;
 - human approval;
-- audit trails;
+- audit trails.
 
-where appropriate.
+This finding later informed BRONNIE's separation between AI reasoning and operational authority.
 
 ---
 
@@ -444,11 +516,11 @@ Discovery identified several categories of existing systems:
 
 - email;
 - calendars;
-- customer/CRM records;
+- customer or CRM records;
 - accounting;
 - document storage;
 - telephone;
-- internal task/communication systems.
+- internal task or communication systems.
 
 BRONNIE should not automatically replace these systems.
 
@@ -457,9 +529,19 @@ For example:
 - calendar availability should come from the authoritative calendar;
 - financial records should come from the accounting system;
 - customer records should come from the appropriate customer system;
-- payment status should come from the payment provider if one is introduced.
+- payment status should come from the authoritative payment provider if one is introduced.
 
 AI should not invent authoritative business information.
+
+### Implication
+
+A future BRONNIE system should distinguish between:
+
+**AI interpretation**
+
+and:
+
+**authoritative operational information.**
 
 ---
 
@@ -525,9 +607,11 @@ Based on discovery evidence, the strongest initial opportunity areas are:
 
 - telephone workflow integration or automation.
 
-These priorities are preliminary.
+These priorities were preliminary discovery findings.
 
-They are not yet the final BRONNIE POC scope.
+They did not establish final BRONNIE implementation scope.
+
+Later Problem Definition selected the Customer Operations problem cluster for initial validation.
 
 ---
 
@@ -537,17 +621,25 @@ Online payment or booking deposits were discussed during discovery.
 
 A possible future workflow could involve:
 
-Customer selects appointment  
-→ Determine whether payment/deposit is required  
-→ Customer completes online payment  
-→ Payment provider confirms payment  
-→ Booking confirmed  
-→ Confirmation sent  
-→ Reminder sent
+```text
+Customer Selects Appointment
+        ↓
+Determine Whether Payment / Deposit Is Required
+        ↓
+Customer Completes Payment
+        ↓
+Payment Provider Confirms Payment
+        ↓
+Booking Confirmed
+        ↓
+Confirmation Sent
+        ↓
+Reminder Sent
+```
 
 A provider such as Stripe was discussed as one possible implementation option.
 
-However, discovery has not yet established:
+However, discovery did not establish:
 
 - booking no-show rate;
 - unpaid booking rate;
@@ -561,7 +653,7 @@ Therefore:
 
 **Online booking payment remains an unvalidated solution hypothesis.**
 
-It must not yet be treated as a BRONNIE requirement.
+Neither payment integration nor a particular payment provider should be treated as a confirmed BRONNIE requirement based on Phase 1 evidence.
 
 ---
 
@@ -579,7 +671,7 @@ It must not yet be treated as a BRONNIE requirement.
 | Telephone workflow | High | Medium/High | Requires validation | P1/P2 |
 | Online booking payment | Unknown | Unknown | High | Hypothesis |
 
-This prioritisation will be revisited during Phase 2.
+This prioritisation was intended to be revisited during Phase 2 Problem Definition.
 
 ---
 
@@ -604,13 +696,15 @@ These include:
 - human intervention rate;
 - administrative cost per transaction.
 
-Where historical data cannot provide these measurements, instrumentation may need to be introduced before or during the BRONNIE pilot.
+Where historical data cannot provide these measurements, instrumentation may need to be introduced before or during later validation and pilot activities.
+
+These measurement gaps are important because BRONNIE must not claim operational improvement without an appropriate baseline.
 
 ---
 
 ## 21. Discovery Evidence vs Solution Hypotheses
 
-It is important to distinguish what discovery identified from what has been proposed as a possible solution.
+It is important to distinguish what discovery identified from what was proposed as a possible solution.
 
 ### Discovery Evidence
 
@@ -639,7 +733,9 @@ It is important to distinguish what discovery identified from what has been prop
 - workflow dashboards;
 - AI-generated customer responses.
 
-Solution hypotheses require validation through later phases.
+Solution hypotheses require validation through later project phases.
+
+The existence of an operational problem does not automatically validate a particular technical solution.
 
 ---
 
@@ -647,33 +743,82 @@ Solution hypotheses require validation through later phases.
 
 The most significant discovery finding can be represented as:
 
-Business event occurs  
-→ Information enters through email, phone or document  
-→ Employee receives information  
-→ Employee interprets information  
-→ Employee determines required workflow  
-→ Employee accesses another system  
-→ Employee manually transfers information  
-→ Employee performs or routes an action  
-→ Follow-up occurs  
-→ Completion is recorded or assumed  
-→ Management has limited end-to-end visibility
+```text
+Business Event Occurs
+        ↓
+Information Enters Through Email, Phone or Document
+        ↓
+Employee Receives Information
+        ↓
+Employee Interprets Information
+        ↓
+Employee Determines Required Workflow
+        ↓
+Employee Accesses Another System
+        ↓
+Employee Manually Transfers Information
+        ↓
+Employee Performs or Routes an Action
+        ↓
+Follow-Up Occurs
+        ↓
+Completion Is Recorded or Assumed
+        ↓
+Management Has Limited End-to-End Visibility
+```
 
 The business problem is therefore broader than simply:
 
-"Too many emails."
+> "Too many emails."
 
-The underlying issue involves the coordination of operational work across people, communication channels and business systems.
+The underlying issue involves coordination of operational work across:
+
+- people;
+- communication channels;
+- business systems;
+- data;
+- decisions;
+- hand-offs.
 
 ---
 
 ## 23. Implication for BRONNIE
 
-Discovery indicates that BRONNIE should be investigated as a potential business operations and workflow coordination platform rather than a collection of unrelated AI features.
+Discovery indicates that BRONNIE should be investigated as a potential business operations and workflow coordination platform rather than as a collection of unrelated AI features.
 
-However, Phase 1 does not determine the final BRONNIE architecture.
+The evidence suggests potential value in a system capable of coordinating:
 
-The next phases must establish:
+```text
+Business Event
+      ↓
+Interpretation
+      ↓
+Structured Information
+      ↓
+Workflow Selection
+      ↓
+Business Rules
+      ↓
+System Interaction
+      ↓
+Workflow State
+      ↓
+Completion
+      ↓
+Operational Visibility
+```
+
+However, Phase 1 does not determine the final BRONNIE:
+
+- architecture;
+- technology stack;
+- workflow implementation;
+- automation level;
+- integration providers;
+- AI model;
+- commercial model.
+
+Later phases must establish:
 
 - which problems BRONNIE will solve first;
 - measurable target outcomes;
@@ -682,30 +827,147 @@ The next phases must establish:
 - system boundaries;
 - human approval boundaries;
 - integration requirements;
+- security requirements;
 - architecture;
-- POC scope.
+- validation scope.
 
 ---
 
-## 24. Phase 1 Conclusion
+## 24. Product Hypothesis
+
+The operational problems identified during discovery may not be unique to the simulated client.
+
+The discovery evidence identified recurring patterns involving:
+
+- fragmented business systems;
+- manual interpretation of customer communications;
+- repetitive cross-system data transfer;
+- appointment coordination;
+- manual workflow routing;
+- limited workflow-state visibility;
+- human-dependent operational scaling.
+
+These patterns may also exist in other service-oriented organisations.
+
+If sufficiently repeatable, they may represent an opportunity for BRONNIE to operate as a reusable business operations platform rather than a solution built specifically for one organisation.
+
+However, this is a **product hypothesis**, not a discovery conclusion.
+
+Phase 1 investigated a single simulated organisational context.
+
+The available evidence does not establish:
+
+- how common these problems are across other organisations;
+- whether different industries experience the same workflows;
+- whether organisations would adopt BRONNIE;
+- willingness to pay;
+- repeatable onboarding requirements;
+- sustainable pricing;
+- customer retention;
+- product-market fit;
+- demand for additional BRONNIE modules.
+
+These questions require additional customer discovery, operational validation, pilot evidence, and eventual commercial testing.
+
+---
+
+## 25. Initial Product Validation Implication
+
+Following later Product Strategy work, the customer-operations problem cluster identified during discovery has been selected as the first BRONNIE vertical slice.
+
+This later decision does not alter the original discovery evidence.
+
+Instead, it uses that evidence to prioritise initial validation involving:
+
+- customer enquiries;
+- intent interpretation;
+- information extraction;
+- internal routing;
+- appointment coordination;
+- workflow state;
+- controlled system interaction;
+- human escalation;
+- operational visibility.
+
+The purpose of the initial vertical slice is to determine whether BRONNIE can solve the selected operational problems safely and measurably while providing a foundation capable of supporting later product expansion.
+
+Broader commercial applicability remains unvalidated.
+
+---
+
+## 26. Relationship to Later Product Strategy
+
+Later project decisions established additional product-level directions including:
+
+- commercial product progression;
+- multi-tenancy;
+- organisation-level tenant boundaries;
+- permission-based access;
+- risk-based automation;
+- explicit AI authority boundaries;
+- evidence-backed auditability;
+- security by design;
+- usage measurement.
+
+These decisions are not presented as Phase 1 discovery findings.
+
+They represent later product decisions informed partly by the operational evidence documented here.
+
+Maintaining this distinction protects project traceability.
+
+The evidence chain is:
+
+```text
+Discovery Evidence
+        ↓
+Problem Definition
+        ↓
+Current-State Analysis
+        ↓
+Product Strategy Decisions
+        ↓
+Requirements Engineering
+```
+
+---
+
+## 27. Phase 1 Conclusion
 
 The discovery evidence supports the following overall conclusion:
 
-The organisation is experiencing increasing administrative workload caused by high-volume customer communications, repetitive manual interpretation, fragmented business systems, manual data transfer, booking coordination, document processing and workflow hand-offs.
+The organisation is experiencing increasing administrative workload associated with:
 
-These processes contribute to slower customer responses, repetitive staff effort, inconsistent information capture and limited management visibility.
+- high-volume customer communications;
+- repetitive manual interpretation;
+- fragmented business systems;
+- manual data transfer;
+- booking coordination;
+- document processing;
+- workflow hand-offs.
 
-The opportunity for BRONNIE is to reduce unnecessary administrative effort and improve workflow coordination and visibility while maintaining appropriate human oversight and business controls.
+These processes contribute to:
+
+- slower customer responses;
+- repetitive staff effort;
+- inconsistent information capture;
+- workflow coordination overhead;
+- limited management visibility.
+
+The opportunity for BRONNIE is to investigate whether unnecessary administrative effort can be reduced and workflow coordination and visibility improved while maintaining appropriate human oversight and business controls.
+
+The evidence supports further investigation.
+
+It does not, by itself, prove technical feasibility, business improvement, commercial viability, or product-market fit.
 
 ---
 
-## 25. Phase 1 Exit Decision
+## 28. Phase 1 Exit Decision
 
 **Phase 1 Status: COMPLETE**
 
-**Decision: PROCEED TO PHASE 2 — PROBLEM DEFINITION**
+**Historical Decision: PROCEED TO PHASE 2 — PROBLEM DEFINITION**
 
-Phase 2 will convert discovery evidence into:
+Phase 2 was required to convert discovery evidence into:
 
 - formal problem statements;
 - root-cause definitions;
@@ -713,6 +975,30 @@ Phase 2 will convert discovery evidence into:
 - business impact statements;
 - measurable target outcomes;
 - problem prioritisation;
-- POC problem boundaries.
+- initial validation boundaries.
 
-Phase 2 must be completed before BRONNIE moves into formal requirements engineering, solution design, architecture or implementation.
+Phase 1 did not authorise implementation.
+
+The subsequent project sequence is:
+
+```text
+Phase 1 — Discovery
+        ↓
+Phase 2 — Problem Definition
+        ↓
+Phase 3 — Current-State Analysis
+        ↓
+Phase 3.5 — Product Strategy and Commercialisation Gate
+        ↓
+Phase 4 — Requirements Engineering
+```
+
+The discovery evidence remains an input to those later phases.
+
+---
+
+## 29. Discovery Integrity Principle
+
+**Discovery records what was observed or reported. Product strategy determines what BRONNIE chooses to build. Requirements define what the system must do. Architecture determines how those requirements will be implemented.**
+
+These must remain separate so that product decisions are traceable to evidence without being presented as evidence themselves.

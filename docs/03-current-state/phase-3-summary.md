@@ -1,8 +1,11 @@
 # BRONNIE — Phase 3 Current-State Analysis Summary
 
-**Project:** BRONNIE  
-**Phase:** Phase 3 — Current-State Analysis  
-**Document Status:** Final  
+**Project:** BRONNIE
+
+**Phase:** Phase 3 — Current-State Analysis
+
+**Document Status:** Final — Product Strategy Alignment Added
+
 **Owner:** Technical Lead / Forward Deployed Engineer
 
 ---
@@ -20,6 +23,8 @@ The objective was to understand how work currently moves through:
 - decisions;
 - exceptions;
 - hand-offs.
+
+The current-state evidence remains specific to the simulated organisational context investigated during discovery.
 
 ---
 
@@ -52,7 +57,7 @@ Administrative employees currently perform:
 - follow-up;
 - context reconstruction.
 
-Administration effectively operates as a manual coordination and integration layer between customers, employees and business systems.
+Administration effectively operates as a manual coordination and integration layer between customers, employees, and business systems.
 
 ---
 
@@ -60,19 +65,29 @@ Administration effectively operates as a manual coordination and integration lay
 
 The dominant workflow pattern is:
 
-Business Event  
-→ Information Received  
-→ Human Reads  
-→ Human Interprets  
-→ Human Selects Workflow  
-→ Human Selects Destination  
-→ Human Accesses Business System  
-→ Human Transfers Information  
-→ Action Performed  
-→ Follow-Up  
+Business Event
+
+→ Information Received
+
+→ Human Reads
+
+→ Human Interprets
+
+→ Human Selects Workflow
+
+→ Human Selects Destination
+
+→ Human Accesses Business System
+
+→ Human Transfers Information
+
+→ Action Performed
+
+→ Follow-Up
+
 → Completion
 
-This pattern occurs repeatedly across the selected POC workflows.
+This pattern occurs repeatedly across the selected Customer Operations workflows.
 
 ---
 
@@ -111,6 +126,8 @@ Current workflows depend on employees deciding:
 - what alternatives should be offered;
 - whether the workflow is complete.
 
+These decisions provide important evidence for later requirements concerning AI interpretation, deterministic business rules, authoritative information, workflow state, and human escalation.
+
 ---
 
 ## 7. Major Exceptions
@@ -130,7 +147,9 @@ Important exceptions include:
 - incorrect information;
 - sensitive actions.
 
-These exceptions must be considered during requirements engineering.
+These exceptions must be explicitly considered during Requirements Engineering.
+
+The future system must not assume that every workflow follows a successful straight-through path.
 
 ---
 
@@ -138,17 +157,21 @@ These exceptions must be considered during requirements engineering.
 
 Customer and workflow information moves between:
 
-Customer  
-→ Communication Channel  
-→ Administration  
-→ Business System / Internal Employee  
+Customer
+
+→ Communication Channel
+
+→ Administration
+
+→ Business System / Internal Employee
+
 → Customer
 
 The current process frequently relies on employees to manually transfer information.
 
 Authoritative data sources must remain authoritative in any future design.
 
-For example, actual appointment availability must come from the calendar rather than AI inference.
+For example, actual appointment availability must come from the authoritative calendar or scheduling system rather than AI inference.
 
 ---
 
@@ -165,7 +188,9 @@ Available stakeholder estimates include:
 | Complex email processing | ~10–15 minutes |
 | Straightforward booking | ~5–10 minutes |
 
-These are preliminary estimates rather than verified production telemetry.
+These are preliminary stakeholder estimates rather than verified production telemetry.
+
+They must not be represented as measured production baselines.
 
 ---
 
@@ -185,13 +210,15 @@ Reliable measurements are still required for:
 - workflow failure rate;
 - cost per administrative transaction.
 
-These gaps must be considered when planning the POC and pilot.
+These gaps must be considered when planning validation and pilot activities.
+
+Where reliable historical data does not exist, instrumentation may be required to establish meaningful baselines.
 
 ---
 
 ## 11. Current-State Conclusion
 
-The selected customer-operations workflows depend heavily on administrative employees to coordinate information between customers, employees and systems.
+The selected Customer Operations workflows depend heavily on administrative employees to coordinate information between customers, employees, and systems.
 
 The greatest recurring sources of friction are:
 
@@ -204,13 +231,98 @@ The greatest recurring sources of friction are:
 - limited state visibility;
 - fragmented communication context.
 
-These findings provide sufficient current-state understanding to begin defining what the future BRONNIE system must accomplish.
+These findings provide sufficient current-state understanding to define what the initial BRONNIE Customer Operations vertical must accomplish.
 
 ---
 
-## 12. Phase 3 Exit Criteria
+## 12. Product Strategy Interpretation
 
-Phase 3 is complete when:
+Following completion of the current-state analysis, BRONNIE's longer-term product direction was clarified through the Product Strategy and Commercialisation Gate.
+
+The Phase 3 findings now provide the operational evidence for the first BRONNIE vertical slice:
+
+**Customer Operations**
+
+This does not mean the Phase 3 evidence proves that the same workflows or pain points exist across all potential BRONNIE customers.
+
+The broader applicability of:
+
+- fragmented business systems;
+- manual interpretation;
+- workflow routing;
+- appointment coordination;
+- repetitive data transfer;
+- limited workflow visibility;
+
+remains a product hypothesis.
+
+Additional customer discovery and commercial validation are required before broader market conclusions are made.
+
+---
+
+## 13. Implications for Requirements Engineering
+
+The current-state analysis indicates that Requirements Engineering must address more than successful automation paths.
+
+Requirements should consider:
+
+- supported customer intents;
+- missing information;
+- ambiguous requests;
+- authoritative data retrieval;
+- routing decisions;
+- appointment availability;
+- changing availability;
+- workflow state;
+- duplicate requests;
+- integration failure;
+- customer non-response;
+- employee non-response;
+- human escalation;
+- sensitive actions;
+- auditability;
+- operational measurement.
+
+The later Product Strategy Gate additionally requires consideration of:
+
+- multi-tenancy;
+- tenant isolation;
+- permission-based authority;
+- AI uncertainty;
+- security;
+- evidence-backed auditability;
+- platform extensibility;
+- usage measurement.
+
+---
+
+## 14. Evidence vs Product Hypothesis
+
+Phase 3 evidence establishes how the selected simulated organisation currently operates.
+
+It does not independently establish:
+
+- market-wide demand;
+- willingness to pay;
+- product-market fit;
+- repeatable requirements across organisations;
+- demand for future BRONNIE modules.
+
+These remain product and commercial hypotheses.
+
+Requirements must therefore be traceable to either:
+
+1. operational evidence;
+2. an accepted product-foundation decision; or
+3. an explicitly identified future hypothesis.
+
+These categories should not be silently mixed.
+
+---
+
+## 15. Phase 3 Exit Criteria
+
+Phase 3 is complete because:
 
 - AS-IS workflows are documented;
 - actors and responsibilities are documented;
@@ -224,13 +336,36 @@ Phase 3 is complete when:
 
 ---
 
-## 13. Phase 3 Exit Decision
+## 16. Phase 3 Exit Decision
 
 **Phase 3 Status: COMPLETE**
 
+**Historical Next Step: Product Strategy and Commercialisation Gate**
+
+Following clarification of BRONNIE's commercial direction, a Phase 3.5 Product Strategy and Commercialisation Gate was introduced before Requirements Engineering.
+
+That gate establishes:
+
+- commercial product direction;
+- Customer Operations as the first vertical slice;
+- multi-tenancy;
+- AI authority boundaries;
+- AI uncertainty handling;
+- automation boundaries;
+- systems-of-record strategy;
+- security principles;
+- auditability;
+- deferred product decisions.
+
+---
+
+## 17. Requirements Engineering Entry
+
+Following completion of the Product Strategy Gate and alignment of previous documentation:
+
 **Next Phase: Phase 4 — Requirements Engineering**
 
-Phase 4 will convert the approved business problems and current-state analysis into formal requirements for BRONNIE.
+Phase 4 will convert the approved business problems, current-state evidence, target outcomes, product decisions, and security principles into formal BRONNIE requirements.
 
 This will include:
 
@@ -240,12 +375,17 @@ This will include:
 - data requirements;
 - AI requirements;
 - security and privacy requirements;
-- audit requirements;
+- audit and observability requirements;
 - human approval requirements;
-- observability requirements;
 - acceptance criteria;
 - requirements traceability.
 
-Requirements must remain traceable to the business problems and current-state evidence established in Phases 1–3.
+Requirements must remain traceable to the evidence and decisions established during earlier phases.
 
-Architecture and implementation must not begin before the requirements are sufficiently defined and reviewed.
+Architecture and implementation must not begin before requirements are sufficiently defined and reviewed.
+
+---
+
+## 18. Phase 3 Alignment Principle
+
+**Use the current-state evidence to define the first Customer Operations vertical without incorrectly treating one simulated organisation as proof of broader commercial demand.**
